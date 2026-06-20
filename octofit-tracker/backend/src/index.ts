@@ -1,10 +1,9 @@
 import express from 'express'
-import mongoose from 'mongoose'
 import apiRouter from './api'
+import { connectDatabase, mongoUri } from './database'
 
 const app = express()
 const port = 8000
-const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/octofit_db'
 const codespaceName = process.env.CODESPACE_NAME
 const apiUrl = codespaceName
   ? `https://${codespaceName}-8000.githubpreview.dev`
@@ -22,8 +21,7 @@ app.get('/', (_req, res) => {
   res.json({ message: 'OctoFit Tracker API is running', apiUrl })
 })
 
-mongoose
-  .connect(mongoUri)
+connectDatabase()
   .then(() => {
     console.log('Connected to MongoDB')
     console.log(`API URL available at ${apiUrl}`)

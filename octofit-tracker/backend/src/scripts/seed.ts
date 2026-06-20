@@ -1,4 +1,4 @@
-import { connectDb, mongoUri } from '../db'
+import { connectDatabase, mongoUri } from '../database'
 import Activity from '../models/Activity'
 import Leaderboard from '../models/Leaderboard'
 import Team from '../models/Team'
@@ -7,7 +7,7 @@ import Workout from '../models/Workout'
 
 const runSeed = async () => {
   console.log('Seed the octofit_db database with test data')
-  await connectDb()
+  await connectDatabase()
   console.log(`Connected to MongoDB at ${mongoUri}`)
 
   await Promise.all([
